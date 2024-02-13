@@ -1,54 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(HealthBarTextPlayer), typeof(HealthBarSliderPlayer), typeof(HealthBarSliderTowards))]
 public class HealthPlayer : MonoBehaviour
 {
-    [SerializeField] private HealthBarTextPlayer _healthBarTextPlayer;
-    [SerializeField] private HealthBarSliderPlayer _healthBarSliderPlayer;
-    [SerializeField] private HealthBarSliderTowards _healthBarSliderTowards;
-    
     [SerializeField] private int _health;
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private int _minHealth = 0;
 
-    private int _currentHealth;
+    public static event Action<int> HealthChanged;
 
-    public int Health { get; private set; }
-
-    private void Awake()
+    private void Start()
     {
-        Health = _health;
-        _currentHealth = Health;
-
-        HealthBarsChange();
-    }
-
-    private void Update()
-    {
-        _healthBarSliderTowards.ChangeHealthBar(_currentHealth, Health);
+        HealthChanged?.Invoke(_health);
     }
 
     public void TakeDamage(int damage)
     {
-        _currentHealth = Health;
-        Health -= damage;
+        if (_health > _minHealth)
+        {
+            _health -= damage;
 
-        HealthBarsChange();
+            HealthChanged?.Invoke(_health);
+        }
     }
 
     public void Heal(int value)
     {
-        _currentHealth = Health;
-        Health += value;
+        if (_health < _maxHealth)
+        {
+            _health += value;
 
-        HealthBarsChange();
-    }
-
-    private void HealthBarsChange()
-    {
-        _healthBarTextPlayer.ChangeHealthBar(Health, _maxHealth);
-
-        _healthBarSliderPlayer.ChangeHealthBar(Health);
+            HealthChanged?.Invoke(_health);
+        }
     }
 }

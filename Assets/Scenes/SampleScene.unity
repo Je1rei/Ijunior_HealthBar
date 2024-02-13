@@ -1088,11 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9888f5567ca160d4b83561c20f029451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBarTextPlayer: {fileID: 1423308693}
-  _healthBarSliderPlayer: {fileID: 1423308694}
-  _healthBarSliderTowards: {fileID: 1423308695}
   _health: 60
-  _maxHealth: 100
 --- !u!4 &1423308692
 Transform:
   m_ObjectHideFlags: 0
@@ -1121,6 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBarText: {fileID: 305218150}
+  _maxValue: 100
 --- !u!114 &1423308694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,7 +1144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 1855002271}
-  _speedFillBar: 35
+  _speedFillBar: 500
 --- !u!1 &1480325005
 GameObject:
   m_ObjectHideFlags: 0

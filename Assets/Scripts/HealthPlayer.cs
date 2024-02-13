@@ -24,6 +24,11 @@ public class HealthPlayer : MonoBehaviour
         HealthBarsChange();
     }
 
+    private void Update()
+    {
+        _healthBarSliderTowards.ChangeHealthBar(_currentHealth, Health);
+    }
+
     public void TakeDamage(int damage)
     {
         _currentHealth = Health;
@@ -45,7 +50,5 @@ public class HealthPlayer : MonoBehaviour
         _healthBarTextPlayer.ChangeHealthBar(Health, _maxHealth);
 
         _healthBarSliderPlayer.ChangeHealthBar(Health);
-
-        _healthBarSliderTowards.ChangeHealthBar(_currentHealth, Health);
     }
 }

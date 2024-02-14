@@ -7,8 +7,11 @@ public class HealthBarSliderTowards : MonoBehaviour
     [SerializeField] private Slider _healthBar;
     [SerializeField] private float _speedFillBar = 10f;
 
+    private Coroutine _currentCoroutine;
+
     private void Awake()
     {
+        
         HealthPlayer.HealthChanged += ChangeHealth;
     }
 
@@ -23,6 +26,11 @@ public class HealthBarSliderTowards : MonoBehaviour
 
     private void ChangeHealth(int health)
     {
-        StartCoroutine(SmoothFillBar(health));
+        if(_currentCoroutine != null)
+        {
+            StopCoroutine(_currentCoroutine);
+        }
+
+        _currentCoroutine = StartCoroutine(SmoothFillBar(health));
     }
 }

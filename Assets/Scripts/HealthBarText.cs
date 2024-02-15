@@ -4,15 +4,17 @@ using TMPro;
 public class HealthBarText : MonoBehaviour
 {
     [SerializeField] private TMP_Text _healthBarText;
-    [SerializeField] private int _maxValue = 100;
+    [SerializeField] private Health _health;
 
     private void Awake()
     {
-        HealthPlayer.HealthChanged += ChangeHealth;
+        _health.Changed += OnHealthChanged;
     }
 
-    private void ChangeHealth(int health)
+    private void OnHealthChanged(int health)
     {
-        _healthBarText.text = health.ToString() + "/" + _maxValue.ToString();
+        string healthText = $"{health} / {_health.MaxValue}";
+
+        _healthBarText.text = healthText;
     }
 }

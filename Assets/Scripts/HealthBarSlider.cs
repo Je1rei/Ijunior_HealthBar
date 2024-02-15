@@ -4,13 +4,14 @@ using UnityEngine.UI;
 public class HealthBarSlider : MonoBehaviour
 {
     [SerializeField] private Slider _healthBar;
+    [SerializeField] private Health _health;
 
     private void Awake()
     {
-        HealthPlayer.HealthChanged += ChangeHealth;
+        _health.Changed += OnHealthChanged;
     }
 
-    private void ChangeHealth(int health)
+    private void OnHealthChanged(int health)
     {
         _healthBar.value = health;
     }

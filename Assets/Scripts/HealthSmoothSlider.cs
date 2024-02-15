@@ -2,19 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthSmoothSlider : MonoBehaviour
+public class HealthSmoothSlider : DataVisualizer
 {
     [SerializeField] private Slider _healthBar;
-    [SerializeField] private Health _health;
 
     [SerializeField] private float _speedFillBar = 10f;
 
     private Coroutine _currentCoroutine;
-
-    private void Awake()
-    {
-        _health.Changed += OnHealthChanged;
-    }
 
     private IEnumerator SmoothFillBar(int targetValue)
     {
@@ -25,7 +19,7 @@ public class HealthSmoothSlider : MonoBehaviour
         }
     }
 
-    private void OnHealthChanged(int health)
+    protected override void OnHealthChanged(int health)
     {
         if(_currentCoroutine != null)
         {
